@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="com.mengdi.dao.StudentDao">
+    	
+    	<!-- 模糊查询 -->
+    	<select id="queryByNameAndGender" resultType="Student">
+    		select * from t_student where name like concat(concat('%',#{name}),'%') and gender = #{gender} limit #{offset}, #{pageSize}  	
+    	</select>
+    	
+    	<!-- 查询满足条件的结果的记录数 -->
+    	<select id="getSearchCount" resultType="int">
+    		select count(*) from t_student where name like concat(concat('%', #{name}), '%') and gender = #{gender}
+    	</select>
+    	
+    	<select id="queryAll" resultType="Student">
+    		select * from t_student limit #{offset}, #{pageSize}
+    	</select>
+    	
+    	<select id="getCount" resultType="int">
+    		select count(*) from t_student
+    	</select>
+    
+    </mapper>
